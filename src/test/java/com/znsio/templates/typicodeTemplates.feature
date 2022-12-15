@@ -1,8 +1,7 @@
 @template
-Feature: API tests for Typicode
+Feature: API tests for Get, Update, Create in Typicode
 
   Background:
-    * print "Setting up Background"
     Given url env.typicodeUrl
     * print "Url is: "+ env.typicodeUrl
 
@@ -13,15 +12,27 @@ Feature: API tests for Typicode
     And param userId = uId
     When method get
     Then status 200
-    And print response.length
-    And def userPosts = response
 
-  @t_getComments
-  Scenario: Get List of Comments
-    * def pId = postId
-    Given path '/comments'
-    And param postId = pId
+  @t_getAlbums
+  Scenario: Get List of Albums
+    * def uId = userId
+    Given path '/albums'
+    And param userId = uId
     When method get
     Then status 200
-    And print response.length
-    And def userComments = response
+
+  @t_createPost
+  Scenario: Create the Post
+    Given path '/posts'
+    * request {"userId": "#(userId)", "title": "#(title)", "body": "#(body)"}
+    When method POST
+    Then status 201
+    * karate.log("Response after creation: " + response)
+
+  @t_updatePost
+  Scenario: Update the Post
+    Given path '/posts/' + userId
+    * request {"title": "#(title)"}
+    When method PUT
+    Then status 201
+    * karate.log("Response after Updation: " + response)
