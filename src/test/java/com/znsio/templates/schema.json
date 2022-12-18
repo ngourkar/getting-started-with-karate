@@ -9,5 +9,18 @@
     "userId": "#number",
     "id": "#number",
     "title": "#string"
+  },
+  "negativeResponse": [],
+  "expectedCreatePostsResponse": {
+    "userId": "#string",
+    "id": "#number",
+    "title": "#string",
+    "body": "#string"
+  },
+  "expectedUpdatePostsResponse": {
+    "userId": "#string",
+    "id": "#number",
+    "title": "#string",
+    "body": "#string"
   }
 }

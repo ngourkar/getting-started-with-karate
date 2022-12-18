@@ -3,7 +3,6 @@ Feature: API tests for Get, Update, Create in Typicode
 
   Background:
     Given url env.typicodeUrl
-    * print "Url is: "+ env.typicodeUrl
 
   @t_getPosts
   Scenario: Get List of Posts
@@ -11,7 +10,7 @@ Feature: API tests for Get, Update, Create in Typicode
     Given path '/posts'
     And param userId = uId
     When method get
-    Then status 200
+    Then match responseStatus == expectedStatus
 
   @t_getAlbums
   Scenario: Get List of Albums
@@ -19,7 +18,7 @@ Feature: API tests for Get, Update, Create in Typicode
     Given path '/albums'
     And param userId = uId
     When method get
-    Then status 200
+    Then match responseStatus == expectedStatus
 
   @t_createPost
   Scenario: Create the Post
